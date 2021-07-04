@@ -12,6 +12,7 @@ export class YangScene {
     private deltaSec :number = 0;
 
     private TickEvent = new Event("Tick");
+    
     /**
      *
      */
@@ -62,5 +63,13 @@ export class YangScene {
         this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.setSize( window.innerWidth, window.innerHeight, false);
         this.renderer.render(this.scene, this.camera);
+    }
+
+    public GetCamera = () => {
+        return this.camera;
+    }
+
+    public GetScene = () => {
+        return this.scene;
     }
 }

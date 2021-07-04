@@ -5,8 +5,10 @@ import { CubePartition } from './cube_partition';
 import { GUI } from 'dat.gui';
 import { Water } from 'three/examples/jsm/objects/Water';
 
+// Canvas
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 
+// My Scene
 const yangScene = new YangScene(canvas);
 yangScene.Tick();
 
@@ -55,7 +57,6 @@ water.rotation.x = - Math.PI / 2;
 
 yangScene.Add(water);
 
-
 // Tick Binding
 canvas.addEventListener("Tick", ()=>{
   const deltaSec = yangScene.GetDeltaSec();
@@ -73,3 +74,10 @@ cubePartitionFolder.add(cubes.rotation, "z", 0, 1);
 cubePartitionFolder.add(cubes, "rotationSpeed", 0, 10);
 
 cubePartitionFolder.open();
+
+// Check Intersections
+let onDocumentMouseDown = () =>{
+  cubes.SwitchPattern();
+}
+
+document.addEventListener( 'mousedown', onDocumentMouseDown, false );
