@@ -19,7 +19,8 @@ export class YangScene {
         this.clock = new THREE.Clock();
 
         this.renderer = new THREE.WebGLRenderer({
-            canvas : canvas
+            canvas : canvas,
+            antialias : true,
         });
 
         const width = window.innerWidth;
