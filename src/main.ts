@@ -2,8 +2,9 @@ import './style.scss'
 import { YangScene } from './scene';
 import * as THREE from 'three';
 import { CubePartition } from './cube_partition'; 
-import { GUI } from 'dat.gui';
+// import { GUI } from 'dat.gui';
 import { Water } from 'three/examples/jsm/objects/Water';
+import WaterTexture from './textures/waternormals.jpg';
 
 // Canvas
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
@@ -42,7 +43,7 @@ const water = new Water(
   {
     textureWidth: 512,
     textureHeight: 512,
-    waterNormals: new THREE.TextureLoader().load( 'textures/waternormals.jpg', function ( texture ) {
+    waterNormals: new THREE.TextureLoader().load( WaterTexture, function ( texture ) {
       texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     } ),
     sunDirection: new THREE.Vector3(),
