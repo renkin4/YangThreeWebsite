@@ -1,9 +1,12 @@
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export class YangScene {
     private scene : THREE.Scene;
     private renderer : THREE.WebGLRenderer;
     private camera : THREE.PerspectiveCamera;
+
+    private controls : OrbitControls;
     /**
      *
      */
@@ -22,10 +25,15 @@ export class YangScene {
 
         this.SetRendererSize();
         window.addEventListener( 'resize', this.SetRendererSize, false );
+
+        this.controls = new OrbitControls( this.camera, canvas );
+        this.controls.update();
     }
 
-    public Animate = () => {
-        requestAnimationFrame( this.Animate );
+    public Tick = () => {
+        requestAnimationFrame( this.Tick );
+        this.controls.update();
+
         this.renderer.render(this.scene, this.camera);
     }
 

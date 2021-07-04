@@ -1,6 +1,7 @@
 import './style.css'
 import { YangScene } from './scene';
 import * as THREE from 'three';
+import { CubePartition } from './cube_partition';
 
 
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
@@ -12,7 +13,6 @@ const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
  
 yangScene.Add(torus);
-
 // Lights
 
 const pointLight = new THREE.PointLight(0xffffff);
@@ -21,4 +21,8 @@ pointLight.position.set(5, 5, 5);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 yangScene.Add(pointLight, ambientLight);
 
-yangScene.Animate();
+const cubes  = new CubePartition(5, 1);
+
+yangScene.Add(...(cubes.GetCubes() as THREE.Object3D[]));
+
+yangScene.Tick();
