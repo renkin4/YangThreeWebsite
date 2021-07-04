@@ -9,6 +9,9 @@ export class CubePartition {
     public desirePadding : number = 2;
     public interpSpeed : number = 1;
 
+    public rotationSpeed : number = 1;
+    public rotation : THREE.Vector3 = new THREE.Vector3();
+
     public root : THREE.Object3D;
 
     /**
@@ -62,6 +65,10 @@ export class CubePartition {
         const deltaMove = dist * clamp(deltaSec* this.interpSpeed, 0.0, 1.0);
         this.paddings += deltaMove;
         
+        this.root.rotation.set(this.root.rotation.x + (deltaSec*this.rotation.x), 
+                                this.root.rotation.y + (deltaSec*this.rotation.y), 
+                                this.root.rotation.z + (deltaSec*this.rotation.z));
+
         const offSet = (this.size * this.paddings);
 
         for (let x = 0; x < this.allCubes.length; x++) {
