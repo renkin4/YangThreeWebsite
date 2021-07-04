@@ -1,10 +1,16 @@
 import * as THREE from "three";
 import { Water } from 'three/examples/jsm/objects/Water';
 import WaterTexture from './textures/waternormals.jpg';
+import { clamp } from 'three/src/math/MathUtils';
 
 export class YangWater{
     private waterGeometry : THREE.PlaneGeometry;
     private water : Water;
+
+    private bAlive : boolean = true;
+    private currentScale : number = 1;
+
+    public desireScale : number = 1;
 
     /**
      *
@@ -31,11 +37,41 @@ export class YangWater{
     }
 
     public Tick = (deltaSec:number) =>{
+        if(!this.bAlive) return;
+
+        const dist = this.desireScale - this.currentScale;
+        if(Math.abs(dist) < 0.01){
+            this.currentScale = this.desireScale;
+        }
+
+        const deltaMove = dist* clamp(deltaSec * 5, 0.0, 1.0);
+        this.currentScale += deltaMove;
+
+        this.water.scale.set(this.currentScale,this.currentScale,this.currentScale);
         this.water.material.uniforms[ 'time' ].value += deltaSec;
     }
 
     public GetWater = () =>{
         return this.water;
+    }
+
+    public Yeet = (bShouldYeet : boolean) => {
+        if(this.bAlive == !bShouldYeet) return;
+
+        if(!bShouldYeet){
+            this.water.visible = true;
+            this.bAlive = !bShouldYeet;
+            this.desireScale = 1;
+            return;
+        }else{
+            this.desireScale = 0;
+        }
+
+        setTimeout(() => {
+            this.bAlive = !bShouldYeet;
+            this.water.visible = !bShouldYeet;
+            this.currentScale = 0;
+        }, 500);
     }
 
 }

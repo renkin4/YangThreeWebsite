@@ -18,6 +18,8 @@ export class CubePartition {
     private cacheTime : number = 0; 
     private triggerNewAnim : number = 5;
 
+    private bAlive : boolean = true;
+
     private paddingPattern : number[] = [
         2, 1, 3, 5, 1, 7, 1, 3 , 2
     ];
@@ -59,6 +61,8 @@ export class CubePartition {
     }
 
     public Tick = (deltaSec : number) => {
+        if(!this.bAlive) return;
+
         this.accumulatedTime += deltaSec;
         this.SetCubesPosition(deltaSec);
         if(this.cacheTime + this.triggerNewAnim < this.accumulatedTime){
@@ -108,6 +112,23 @@ export class CubePartition {
             }
             
         }
+    }
+
+    public Yeet = (bShouldYeet) => {
+        if(this.bAlive == !bShouldYeet) return;
+
+        if(bShouldYeet){
+            this.desirePadding = 50;
+        }else{
+            this.desirePadding = this.paddingPattern[this.currentPattern];
+        }
+
+        setTimeout(() => {
+            this.bAlive = !bShouldYeet;     
+            this.root.traverse(function(child){
+                child.visible = !bShouldYeet;
+            });       
+        }, 500);
     }
 
     public GetRoot = () => {

@@ -40,11 +40,24 @@ yangScene.Add(cubes.GetRoot());
 const water = new YangWater();
 yangScene.Add(water.GetWater());
 
+// Event Handlers
+const eventHandler = new EventHandler();
+eventHandler.BindScroll();
+
 // Tick Binding
 canvas.addEventListener("Tick", ()=>{
   const deltaSec = yangScene.GetDeltaSec();
   cubes.Tick(deltaSec);
   water.Tick(deltaSec);
+
+  const scrollHeight = eventHandler.GetScrollHeight();
+  if(scrollHeight > (window.innerHeight * 0.5)){
+    cubes.Yeet(true);
+    water.Yeet(true);
+  }else{
+    cubes.Yeet(false);
+    water.Yeet(false);
+  }
 });
 
 // Dat Gui
@@ -58,6 +71,3 @@ canvas.addEventListener("Tick", ()=>{
 
 // cubePartitionFolder.open();
 
-// Event Handlers
-const eventHandler = new EventHandler();
-eventHandler.BindScroll();
