@@ -33,15 +33,15 @@ export class YangScene {
         this.SetRendererSize();
         window.addEventListener( 'resize', this.SetRendererSize, false );
 
-        this.controls = new OrbitControls( this.camera, canvas );
-        this.controls.update();
+        // this.controls = new OrbitControls( this.camera, canvas );
+        // this.controls.update();
     }
 
     public Tick = () => {
         requestAnimationFrame( this.Tick );
 
         this.deltaSec = this.clock.getDelta();
-        this.controls.update();
+        // this.controls.update();
 
         this.renderer.render(this.scene, this.camera);
 

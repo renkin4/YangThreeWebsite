@@ -36,7 +36,7 @@ const cubes  = new CubePartition(3, 3, cubeMaterial);
 yangScene.Add(cubes.GetRoot()); 
 
 // Water
-const waterGeometry = new THREE.PlaneGeometry( 500, 250 );
+const waterGeometry = new THREE.PlaneGeometry( 600, 250 );
 const water = new Water(
   waterGeometry,
   {
