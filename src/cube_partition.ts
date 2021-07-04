@@ -14,11 +14,20 @@ export class CubePartition {
 
     public root : THREE.Object3D;
 
+    private accumulatedTime : number = 0;
+    private cacheTime : number = 0; 
+    private triggerNewAnim : number = 3;
+
+    private paddingPattern : number[] = [
+        1, 3, 5, 1, 7, 1, 3 , 2
+    ];
+    private currentPattern : number = 0;
+
     /**
      * @param amountOfCubes 1x1x1, 2x2x2, 3x3x3
      * @param size by cm
      */
-    constructor(amountOfCubes : number = 3, size : number = 1) { 
+    constructor(amountOfCubes : number = 3, size : number = 1, material : THREE.Material) { 
         this.root = new THREE.Object3D();
         this.root.position.set(0,0,0);
 
@@ -30,8 +39,7 @@ export class CubePartition {
             for(let y = 0; y < amountOfCubes; ++y){
                 this.allCubes[x].push([]);
                 for(let z = 0; z < amountOfCubes; ++z){
-                    const geometry = new THREE.BoxGeometry( size, size, size );
-                    const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+                    const geometry = new THREE.BoxGeometry( size, size, size ); 
                     const cube = new THREE.Mesh( geometry, material );
                     
                     const newPosition = new THREE.Vector3(x * size * this.paddings, y* size * this.paddings, z * size * this.paddings);
@@ -49,8 +57,19 @@ export class CubePartition {
     }
 
     public Tick = (deltaSec : number) => {
+        this.accumulatedTime += deltaSec;
         this.SetCubesPosition(deltaSec);
+
+        if(this.cacheTime + this.triggerNewAnim < this.accumulatedTime){
+            this.cacheTime = this.accumulatedTime;
+
+            this.desirePadding = this.paddingPattern[this.currentPattern % this.paddingPattern.length];
+            this.currentPattern++;
+            console.log(this.paddingPattern[this.currentPattern % this.paddingPattern.length]);
+        }
     }
+
+
 
     private SetCubesPosition = (deltaSec : number) =>{ 
         if(this.interpSpeed <= 0.0){

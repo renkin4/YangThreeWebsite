@@ -10,13 +10,21 @@ const yangScene = new YangScene(canvas);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5, 5, 5);
+const pointLight = new THREE.PointLight(0xFF0000);
+pointLight.position.set(-25, 25, 0);
 
-const ambientLight = new THREE.AmbientLight(0xffffff);
-yangScene.Add(pointLight, ambientLight);
+const pointLight2 = new THREE.PointLight(0x0000FF);
+pointLight2.position.set(25, -25, 0);
 
-const cubes  = new CubePartition(3, 3);
+yangScene.Add(pointLight, pointLight2);
+
+const cubeMaterial = new THREE.MeshPhongMaterial();
+cubeMaterial.color.setRGB(1,1,1);
+cubeMaterial.flatShading = false;
+cubeMaterial.reflectivity = 1;
+cubeMaterial.shininess = 100;
+
+const cubes  = new CubePartition(3, 3, cubeMaterial);
 
 yangScene.Add(cubes.GetRoot()); 
 yangScene.Tick();
