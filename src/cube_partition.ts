@@ -10,7 +10,7 @@ export class CubePartition {
     public interpSpeed : number = 1;
 
     public rotationSpeed : number = 0.5;
-    public rotation : THREE.Vector3 = new THREE.Vector3();
+    public rotation : THREE.Vector3 = new THREE.Vector3(1,1,1);
 
     public root : THREE.Object3D;
 

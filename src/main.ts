@@ -33,6 +33,4 @@ cubePartitionFolder.add(cubes.rotation, "y", 0, 1);
 cubePartitionFolder.add(cubes.rotation, "z", 0, 1);
 cubePartitionFolder.add(cubes, "rotationSpeed", 0, 10);
 
-
-
 cubePartitionFolder.open();
