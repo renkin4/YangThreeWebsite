@@ -9,7 +9,7 @@ export class CubePartition {
     public desirePadding : number = 2;
     public interpSpeed : number = 1;
 
-    public rotationSpeed : number = 1;
+    public rotationSpeed : number = 0.5;
     public rotation : THREE.Vector3 = new THREE.Vector3();
 
     public root : THREE.Object3D;
@@ -58,7 +58,7 @@ export class CubePartition {
         }
 
         const dist = this.desirePadding - this.paddings;
-        if(dist < 0.01){
+        if(Math.abs(dist) < 0.01){
             this.paddings = this.desirePadding;
         }
 

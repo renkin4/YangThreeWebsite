@@ -28,9 +28,9 @@ canvas.addEventListener("Tick", ()=>{
 const gui = new GUI();
 const cubePartitionFolder = gui.addFolder("Cube Partition");
 cubePartitionFolder.add(cubes, "desirePadding", 1, 10);
-cubePartitionFolder.add(cubes.rotation, "x", 0, 10);
-cubePartitionFolder.add(cubes.rotation, "y", 0, 10);
-cubePartitionFolder.add(cubes.rotation, "z", 0, 10);
+cubePartitionFolder.add(cubes.rotation, "x", 0, 1);
+cubePartitionFolder.add(cubes.rotation, "y", 0, 1);
+cubePartitionFolder.add(cubes.rotation, "z", 0, 1);
 cubePartitionFolder.add(cubes, "rotationSpeed", 0, 10);
 
 
