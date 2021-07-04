@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export class CubePartition {
-    private allCubes : any[] = [];
+    private allCubes : any[][][] = [];
     private paddings : number = 3;
 
     /**
@@ -12,7 +12,9 @@ export class CubePartition {
         const offSet = (size * this.paddings);
 
         for(let x = 0; x < amountOfCubes; ++x){
+            this.allCubes.push([]);
             for(let y = 0; y < amountOfCubes; ++y){
+                this.allCubes[x].push([]);
                 for(let z = 0; z < amountOfCubes; ++z){
                     const geometry = new THREE.BoxGeometry( size, size, size );
                     const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
@@ -25,20 +27,25 @@ export class CubePartition {
 
                     cube.position.set(newPosition.x, newPosition.y, newPosition.z);
 
-                    this.allCubes.push(cube);
+                    this.allCubes[x][y].push(cube);
                 }
             }
         }
     }
 
-    public GetCubes = () => {
-        this.Debug();
-        return this.allCubes;
+    public Tick = (deltaSec : number) => {
+
     }
 
-    private Debug = () => {
-        this.allCubes.forEach((cube)=>{
-            console.log(cube.position);
-        });
+    public GetCubes = () => {
+        var cubesArr : any[] = [];
+
+        for (let i = 0; i < this.allCubes.length; i++) {
+            for (let j = 0; j < this.allCubes[i].length; j++) {
+                const element = this.allCubes[i][j];
+                cubesArr = cubesArr.concat(element);
+            }
+        }
+        return cubesArr;
     }
 }

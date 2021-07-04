@@ -23,8 +23,5 @@ yangScene.Add(pointLight, ambientLight);
 
 const cubes  = new CubePartition(3, 3);
 
-yangScene.Add(...(cubes.GetCubes() as THREE.Object3D[]));
-// const gridHelper = new THREE.GridHelper( 10, 10 );
-// yangScene.Add(gridHelper);
-
+yangScene.Add(...(cubes.GetCubes() as THREE.Object3D[])); 
 yangScene.Tick();
