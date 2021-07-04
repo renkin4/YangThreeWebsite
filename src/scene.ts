@@ -27,7 +27,7 @@ export class YangScene {
         const height = window.innerHeight;
 
         this.camera = new THREE.PerspectiveCamera(90, width/ height, 0.1, 1000);
-        this.camera.position.setZ(30);
+        this.camera.position.setZ(40);
 
         this.SetRendererSize();
         window.addEventListener( 'resize', this.SetRendererSize, false );

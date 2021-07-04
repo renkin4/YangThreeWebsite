@@ -9,17 +9,17 @@ export class CubePartition {
     public desirePadding : number = 2;
     public interpSpeed : number = 1;
 
-    public rotationSpeed : number = 0.5;
+    public rotationSpeed : number = 1;
     public rotation : THREE.Vector3 = new THREE.Vector3(1,1,1);
 
     public root : THREE.Object3D;
 
     private accumulatedTime : number = 0;
     private cacheTime : number = 0; 
-    private triggerNewAnim : number = 3;
+    private triggerNewAnim : number = 5;
 
     private paddingPattern : number[] = [
-        1, 3, 5, 1, 7, 1, 3 , 2
+        2, 1, 3, 5, 1, 7, 1, 3 , 2
     ];
     private currentPattern : number = 0;
 
@@ -30,6 +30,8 @@ export class CubePartition {
     constructor(amountOfCubes : number = 3, size : number = 1, material : THREE.Material) { 
         this.root = new THREE.Object3D();
         this.root.position.set(0,0,0);
+
+        this.desirePadding = this.paddingPattern[0];
 
         const offSet = (size * this.paddings);
         this.size = size;
@@ -65,7 +67,7 @@ export class CubePartition {
 
             this.desirePadding = this.paddingPattern[this.currentPattern % this.paddingPattern.length];
             this.currentPattern++;
-            console.log(this.paddingPattern[this.currentPattern % this.paddingPattern.length]);
+            // console.log(this.paddingPattern[this.currentPattern % this.paddingPattern.length]);
         }
     }
 
@@ -84,9 +86,9 @@ export class CubePartition {
         const deltaMove = dist * clamp(deltaSec* this.interpSpeed, 0.0, 1.0);
         this.paddings += deltaMove;
         
-        this.root.rotation.set(this.root.rotation.x + (deltaSec*this.rotation.x), 
-                                this.root.rotation.y + (deltaSec*this.rotation.y), 
-                                this.root.rotation.z + (deltaSec*this.rotation.z));
+        this.root.rotation.set(this.root.rotation.x + (this.rotationSpeed* deltaSec*this.rotation.x), 
+                                this.root.rotation.y + (this.rotationSpeed* deltaSec*this.rotation.y), 
+                                this.root.rotation.z + (this.rotationSpeed* deltaSec*this.rotation.z));
 
         const offSet = (this.size * this.paddings);
 
