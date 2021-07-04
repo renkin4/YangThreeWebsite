@@ -6,12 +6,18 @@ export class YangScene {
     private renderer : THREE.WebGLRenderer;
     private camera : THREE.PerspectiveCamera;
 
+    private clock : THREE.Clock;
     private controls : OrbitControls;
+
+    private deltaSec :number = 0;
+
+    private TickEvent = new Event("Tick");
     /**
      *
      */
     constructor(canvas: HTMLCanvasElement) {
         this.scene = new THREE.Scene();
+        this.clock = new THREE.Clock();
 
         this.renderer = new THREE.WebGLRenderer({
             canvas : canvas
@@ -32,9 +38,17 @@ export class YangScene {
 
     public Tick = () => {
         requestAnimationFrame( this.Tick );
+
+        this.deltaSec = this.clock.getDelta();
         this.controls.update();
 
         this.renderer.render(this.scene, this.camera);
+
+        this.renderer.domElement.dispatchEvent(this.TickEvent);
+    }
+
+    public GetDeltaSec = () => {
+        return this.deltaSec;
     }
 
     public Add = (...object : THREE.Object3D[]) => {

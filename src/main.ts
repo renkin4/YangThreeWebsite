@@ -23,5 +23,9 @@ yangScene.Add(pointLight, ambientLight);
 
 const cubes  = new CubePartition(3, 3);
 
-yangScene.Add(...(cubes.GetCubes() as THREE.Object3D[])); 
+yangScene.Add(cubes.GetRoot()); 
 yangScene.Tick();
+
+canvas.addEventListener("Tick", ()=>{
+  cubes.Tick(yangScene.GetDeltaSec());
+});
