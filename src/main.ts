@@ -1,18 +1,13 @@
 import './style.css'
 import { YangScene } from './scene';
 import * as THREE from 'three';
-import { CubePartition } from './cube_partition';
-
+import { CubePartition } from './cube_partition'; 
+import { GUI } from 'dat.gui';
 
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 
 const yangScene = new YangScene(canvas);
 
-// const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-// const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
-// const torus = new THREE.Mesh(geometry, material);
- 
-// yangScene.Add(torus);
 // Lights
 
 const pointLight = new THREE.PointLight(0xffffff);
@@ -29,3 +24,8 @@ yangScene.Tick();
 canvas.addEventListener("Tick", ()=>{
   cubes.Tick(yangScene.GetDeltaSec());
 });
+
+const gui = new GUI();
+const cubePartitionFolder = gui.addFolder("Cube Partition");
+cubePartitionFolder.add(cubes, "desirePadding", 1, 10);
+cubePartitionFolder.open();
