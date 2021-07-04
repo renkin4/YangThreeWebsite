@@ -1,4 +1,4 @@
-import './style.css'
+import './style.scss'
 import { YangScene } from './scene';
 import * as THREE from 'three';
 import { CubePartition } from './cube_partition'; 

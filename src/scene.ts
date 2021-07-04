@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export class YangScene {
     private scene : THREE.Scene;
@@ -7,7 +6,6 @@ export class YangScene {
     private camera : THREE.PerspectiveCamera;
 
     private clock : THREE.Clock;
-    private controls : OrbitControls;
 
     private deltaSec :number = 0;
 
