@@ -61,17 +61,17 @@ export class CubePartition {
     public Tick = (deltaSec : number) => {
         this.accumulatedTime += deltaSec;
         this.SetCubesPosition(deltaSec);
-
         if(this.cacheTime + this.triggerNewAnim < this.accumulatedTime){
-            this.cacheTime = this.accumulatedTime;
-
-            this.desirePadding = this.paddingPattern[this.currentPattern % this.paddingPattern.length];
-            this.currentPattern++;
-            // console.log(this.paddingPattern[this.currentPattern % this.paddingPattern.length]);
+            this.SwitchPattern();
         }
     }
 
+    public SwitchPattern = () => {
+        this.cacheTime = this.accumulatedTime;
 
+        this.desirePadding = this.paddingPattern[this.currentPattern % this.paddingPattern.length];
+        this.currentPattern++;
+    }
 
     private SetCubesPosition = (deltaSec : number) =>{ 
         if(this.interpSpeed <= 0.0){

@@ -17,7 +17,7 @@ pointLight.position.set(-25, 25, 0);
 const pointLight2 = new THREE.PointLight(0x0000FF);
 pointLight2.position.set(25, -25, 0);
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+// const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 
 yangScene.Add(pointLight, pointLight2);
 
