@@ -14,25 +14,9 @@ export class EventHandler{
     }
 
     public BindScroll = () =>{ 
-        document.addEventListener('wheel', (e) => { 
-            // window.scrollTo(0,0);
-            // e.preventDefault();
-            if(e.deltaY > 0) {
-              this.ScrollDown();
-            } else {
-              this.ScrollUp();
-            }
+        addEventListener("scroll", () => {
+            this.scrollHeight = document.documentElement.scrollTop;
         });
-        
-    }
-
-    private ScrollDown = () => {
-        this.scrollHeight = document.documentElement.scrollTop;
-
-    }
-
-    private ScrollUp = () => {
-        this.scrollHeight = document.documentElement.scrollTop;
     }
 
     public GetScrollHeight = () => {

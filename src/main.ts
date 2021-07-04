@@ -51,7 +51,7 @@ canvas.addEventListener("Tick", ()=>{
   water.Tick(deltaSec);
 
   const scrollHeight = eventHandler.GetScrollHeight();
-  if(scrollHeight > (window.innerHeight * 0.5)){
+  if(scrollHeight > (window.innerHeight * 0.35)){
     cubes.Yeet(true);
     water.Yeet(true);
   }else{
