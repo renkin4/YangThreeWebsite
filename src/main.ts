@@ -1,8 +1,8 @@
 import './style.css'
+import { YangScene } from './scene';
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+const yangScene = new YangScene(canvas);
+
+yangScene.Animate();
