@@ -2,9 +2,9 @@ import './style.scss'
 import { YangScene } from './scene';
 import * as THREE from 'three';
 import { CubePartition } from './cube_partition'; 
+import { YangWater } from './water';
+import { EventHandler } from './event_handler';
 // import { GUI } from 'dat.gui';
-import { Water } from 'three/examples/jsm/objects/Water';
-import WaterTexture from './textures/waternormals.jpg';
 
 // Canvas
 const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
@@ -37,32 +37,14 @@ const cubes  = new CubePartition(3, 3, cubeMaterial);
 yangScene.Add(cubes.GetRoot()); 
 
 // Water
-const waterGeometry = new THREE.PlaneGeometry( 600, 250 );
-const water = new Water(
-  waterGeometry,
-  {
-    textureWidth: 512,
-    textureHeight: 512,
-    waterNormals: new THREE.TextureLoader().load( WaterTexture, function ( texture ) {
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    } ),
-    sunDirection: new THREE.Vector3(),
-    sunColor: 0xffffff,
-    waterColor: 0x000000,
-    distortionScale: 3.7
-  }
-);
-
-water.position.set(0,-15,0);
-water.rotation.x = - Math.PI / 2;
-
-yangScene.Add(water);
+const water = new YangWater();
+yangScene.Add(water.GetWater());
 
 // Tick Binding
 canvas.addEventListener("Tick", ()=>{
   const deltaSec = yangScene.GetDeltaSec();
   cubes.Tick(deltaSec);
-  water.material.uniforms[ 'time' ].value += deltaSec;
+  water.Tick(deltaSec);
 });
 
 // Dat Gui
@@ -76,9 +58,6 @@ canvas.addEventListener("Tick", ()=>{
 
 // cubePartitionFolder.open();
 
-// Check Intersections
-let onDocumentMouseDown = () =>{
-  cubes.SwitchPattern();
-}
+// Event Handlers
+const eventHandler = new EventHandler();
 
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
