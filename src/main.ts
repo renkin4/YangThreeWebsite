@@ -13,10 +13,10 @@ const yangScene = new YangScene(canvas);
 yangScene.Tick();
 
 // Lights
-const pointLight = new THREE.PointLight(0xFF0000);
+const pointLight = new THREE.PointLight(0xFFFFFF);
 pointLight.position.set(-25, 25, 0);
 
-const pointLight2 = new THREE.PointLight(0x0000FF);
+const pointLight2 = new THREE.PointLight(0xFFFFFF);
 pointLight2.position.set(25, -25, 0);
 
 // const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
@@ -65,15 +65,15 @@ canvas.addEventListener("Tick", ()=>{
 });
 
 // Dat Gui
-const gui = new GUI();
-const cubePartitionFolder = gui.addFolder("Cube Partition");
-cubePartitionFolder.add(cubes, "desirePadding", 1, 10);
-cubePartitionFolder.add(cubes.rotation, "x", 0, 1);
-cubePartitionFolder.add(cubes.rotation, "y", 0, 1);
-cubePartitionFolder.add(cubes.rotation, "z", 0, 1);
-cubePartitionFolder.add(cubes, "rotationSpeed", 0, 10);
+// const gui = new GUI();
+// const cubePartitionFolder = gui.addFolder("Cube Partition");
+// cubePartitionFolder.add(cubes, "desirePadding", 1, 10);
+// cubePartitionFolder.add(cubes.rotation, "x", 0, 1);
+// cubePartitionFolder.add(cubes.rotation, "y", 0, 1);
+// cubePartitionFolder.add(cubes.rotation, "z", 0, 1);
+// cubePartitionFolder.add(cubes, "rotationSpeed", 0, 10);
 
-cubePartitionFolder.open();
+// cubePartitionFolder.open();
 
 // Check Intersections
 let onDocumentMouseDown = () =>{
