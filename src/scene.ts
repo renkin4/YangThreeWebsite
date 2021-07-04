@@ -8,20 +8,20 @@ export class YangScene {
      *
      */
     constructor(canvas: HTMLCanvasElement) {
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-
         this.scene = new THREE.Scene();
-
-        this.camera = new THREE.PerspectiveCamera(90, width/ height, 0.1, 1000);
-        this.camera.position.setZ(30);
 
         this.renderer = new THREE.WebGLRenderer({
             canvas : canvas
         });
 
-        this.renderer.setSize( width, height, false);
-        this.renderer.render(this.scene, this.camera);
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        this.camera = new THREE.PerspectiveCamera(90, width/ height, 0.1, 1000);
+        this.camera.position.setZ(30);
+
+        this.SetRendererSize();
+        window.addEventListener( 'resize', this.SetRendererSize, false );
     }
 
     public Animate = () => {
@@ -31,5 +31,14 @@ export class YangScene {
 
     public Add = (...object : THREE.Object3D[]) => {
         this.scene.add(...object);
+    }
+
+    private SetRendererSize = () => {
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+
+        this.renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize( window.innerWidth, window.innerHeight, false);
+        this.renderer.render(this.scene, this.camera);
     }
 }
