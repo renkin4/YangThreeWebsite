@@ -14,15 +14,9 @@ export class EventHandler{
         allSection.forEach((sec)=>{
             this.allSectionsId.push(sec);
         });
-
-        this.BindScroll();
     }
 
     public BindScroll = () =>{ 
-        document.addEventListener('scroll', (e)=>{
-            // window.scrollTo(0,0);
-        });
-
         document.addEventListener('wheel', (e) => { 
             // window.scrollTo(0,0);
             // e.preventDefault();
@@ -54,20 +48,12 @@ export class EventHandler{
     private Focus = () => {
         this.cacheTime = new Date().getTime();
 
-        const elem = this.allSectionsId[this.currentIndex];
+        const height = window.innerHeight * (this.allSectionsId.length - 1);
         
-        const getHeight = window.innerHeight * (this.currentIndex/this.allSectionsId.length -1);
-        console.log(getHeight);
+        const elem = this.allSectionsId[this.currentIndex];
+        const getHeight = height * (this.currentIndex / (this.allSectionsId.length -1));
+
         window.scrollTo(0, getHeight);
-
-        // const test = document.getElementById(elem.id);
-        console.log(`Scrolling To ${elem.id} - ${elem.scrollHeight}`);
-
-        // if(test){
-        //     // test.scrollIntoView();
-        // }
-        // window.scrollTo(elem);
-        // elem.scrollIntoView();
     }
 
 }

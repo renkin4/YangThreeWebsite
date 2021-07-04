@@ -60,4 +60,5 @@ canvas.addEventListener("Tick", ()=>{
 
 // Event Handlers
 const eventHandler = new EventHandler();
+eventHandler.BindScroll();
 
