@@ -6,6 +6,7 @@ export class YangScene {
     private renderer : THREE.WebGLRenderer;
     private camera : THREE.PerspectiveCamera;
     private controls : OrbitControls;
+    private TickEvent = new Event("Tick");
 
     /**
      *
@@ -47,5 +48,8 @@ export class YangScene {
         this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.setSize( window.innerWidth, window.innerHeight, false);
         this.renderer.render(this.scene, this.camera);
+
+        this.renderer.domElement.dispatchEvent(this.TickEvent);
+
     }
 }
