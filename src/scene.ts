@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 export class YangScene {
     private scene : THREE.Scene;
     private renderer : THREE.WebGLRenderer;
-    private camera : THREE.PerspectiveCamera;
+    public camera : THREE.PerspectiveCamera;
     private controls : OrbitControls;
     private TickEvent = new Event("Tick");
 
@@ -15,14 +15,15 @@ export class YangScene {
         this.scene = new THREE.Scene();
 
         this.renderer = new THREE.WebGLRenderer({
-            canvas : canvas
+            canvas : canvas,
+            alpha : false
         });
 
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        this.camera = new THREE.PerspectiveCamera(90, width/ height, 0.1, 1000);
-        this.camera.position.setZ(30);
+        this.camera = new THREE.PerspectiveCamera(60, width/ height, 1, 2000);
+        this.camera.position.setZ(4);
 
         this.controls = new OrbitControls(this.camera, canvas);
         this.controls.update();
