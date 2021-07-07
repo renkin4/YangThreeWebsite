@@ -7,8 +7,10 @@ const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
 
 const yangScene = new YangScene(canvas);
 
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const geometry = new THREE.BoxGeometry(10, 10, 10);
+const material = new THREE.MeshStandardMaterial({ 
+    color: 0xff6347,
+});
 const torus = new THREE.Mesh(geometry, material);
  
 yangScene.Add(torus);
