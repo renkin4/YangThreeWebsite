@@ -1,8 +1,9 @@
 #shader vertex
-varying vec3 cameraPosition;
+varying vec3 vCameraPosition;
 
 void main() 
 { 
+    vCameraPosition = cameraPosition;
     gl_Position = vec4(position, 1);
 }
 
@@ -12,7 +13,7 @@ void main()
 #define MAX_DIST 100.
 #define SURF_DIST 0.001
 
-varying vec3 cameraPosition;
+varying vec3 vCameraPosition;
 uniform vec2 resolution;
 
 uniform mat4 cameraWorldMatrix;
